@@ -1,6 +1,6 @@
 import React from 'react';
 // import Button from '@material-ui/core/Button';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 // const button = (props) => (
 //   <Button size="large">
