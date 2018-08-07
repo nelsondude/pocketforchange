@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import PlaidLink from 'react-plaid-link'
+import BankConnect from 'components/BankConnect/BankConnect';
 
 class Registration extends React.Component {
   //User name: user_good
@@ -42,14 +42,10 @@ class Registration extends React.Component {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
 
-        <PlaidLink
-          clientName={'Pocket For Change'}
-          env={process.env.REACT_APP_PLAID_ENV}
-          publicKey={process.env.REACT_APP_PLAID_PUBLIC_KEY}
-          product={["auth", "transactions"]}
-          onExit={this.handleOnExit}
+        <BankConnect
+          message={'Open Link and connect to your bank!'}
           onSuccess={this.handleOnSuccess}
-        >Open Link and connect to your bank!</PlaidLink>
+          onExit={this.handleOnExit}/>
       </Fragment>
     )
   }
