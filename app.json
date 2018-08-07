@@ -5,5 +5,8 @@
         "test": "pytest"
       }
     }
-  }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
 }
