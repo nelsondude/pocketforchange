@@ -12,6 +12,10 @@ djangorestframework = "*"
 "psycopg2" = "*"
 pytest = "*"
 django-heroku = "*"
+gunicorn = "*"
+pytest-django = "*"
+pip = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.6"

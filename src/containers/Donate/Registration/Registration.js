@@ -1,10 +1,17 @@
 import React, { Fragment } from 'react';
+import axios from 'axios-instance';
 
 class Registration extends React.Component {
 
   submitHandler = (event) => {
-    alert('Submitted form');
     event.preventDefault();
+    axios.get('/donate/users/')
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {

@@ -1,12 +1,13 @@
 import React from 'react';
 import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 
 const navbar = () => {
   return (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/">Pocket for Change</a>
+          <Link to="/">Pocket for Change</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
