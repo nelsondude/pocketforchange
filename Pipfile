@@ -12,6 +12,7 @@ djangorestframework = "*"
 "psycopg2" = "*"
 pytest = "*"
 django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
