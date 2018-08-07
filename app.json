@@ -2,8 +2,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test-setup": "",
-        "test": "pytest backend/"
+        "test": "pytest"
       }
     }
   }
