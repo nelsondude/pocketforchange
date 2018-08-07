@@ -10,6 +10,7 @@ django = "==2.*"
 django-rest-framework = "*"
 djangorestframework = "*"
 "psycopg2" = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.6"
