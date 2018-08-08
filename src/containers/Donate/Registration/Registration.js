@@ -16,13 +16,10 @@ class Registration extends React.Component {
     console.log(this.state);
   };
 
-  handleOnSuccess = (token, metadata) => {
+  handleOnSuccess = (token) => {
     axios.post('/plaid/get_access_token/', {'token': token})
-      .then(res => {
-        this.setState({
-          access_token: res.data.access_token,
-          item_id: res.data.item_id
-        })
+      .then(_ => {
+        console.log('Successfully saved access/id tokens')
       })
       .catch(err => {
         console.log(err);

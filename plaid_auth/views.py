@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
 
+from plaid_auth.models import PlaidItem
+
 from pfc.constants import (
     PLAID_CLIENT_ID,
     PLAID_ENV,
@@ -22,11 +24,18 @@ client = plaid.Client(
 
 @csrf_exempt
 def get_access_token(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         data = json.loads(request.body.decode('utf-8'))
         public_token = data.get('token', '')
         exchange_response = client.Item.public_token.exchange(public_token)
-        return JsonResponse(exchange_response)
+        access_token = exchange_response['access_token']
+        item_id = exchange_response['item_id']
+        plaid_item, created = PlaidItem.objects.get_or_create(
+            access_token=access_token,
+            item_id=item_id,
+            user=request.user
+        )
+        return JsonResponse({'created': created})
     raise Http404
 
 
