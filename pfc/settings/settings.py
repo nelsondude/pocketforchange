@@ -23,7 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'vx60sqq(hz5xk+kb_*lhgp@9y5wzzp)cmux04fssz=ct^_3hyu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ENV = os.getenv('PFC_ENV')
+if ENV == 'development':
+    DEBUG = True
+elif ENV == 'production':
+    DEBUG = False
+else:
+    raise RuntimeError('PFC_ENV variable not set')
 
 ALLOWED_HOSTS = ["*"]
 
