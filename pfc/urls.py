@@ -11,6 +11,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('donate/', include('donate.urls')),
     path('plaid/', include('plaid_auth.urls')),
+    path('accounts/', include('accounts.urls')),
     path('api-token-auth/', obtain_jwt_token),
     re_path('.*', FrontendView.as_view()),
 ]

@@ -1,15 +1,26 @@
 import React from 'react';
+import axios from 'axios-instance';
 
 class RegisterUser extends React.Component {
   state = {
     name: '',
     email: '',
     password: '',
+    errors: [],
   };
 
   submitHandler = (event) => {
     event.preventDefault();
-    console.log(this.state);
+    const data = new FormData(event.target);
+    axios.post('/accounts/register/', data)
+      .then(res => {
+        if (res != null) {
+          alert('Something went wrong! Please try again.')
+        }
+      })
+      .catch(err => {
+        console.log('Couldnt register the user')
+      });
   };
 
   handleInputChange = (event) => {
@@ -30,34 +41,44 @@ class RegisterUser extends React.Component {
               <div className="form-group">
                 <label htmlFor="name">Full Name</label>
                 <input
+                  required
                   className="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="John Smith"
-                  onChange={this.handleInputChange}/>
+                  id="username"
+                  name="username"
+                  placeholder="John Smith"/>
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email address</label>
                 <input
+                  required
                   type="email"
                   className="form-control"
                   id="email"
                   name="email"
                   aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  onChange={this.handleInputChange}/>
+                  placeholder="Enter email"/>
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.
                 </small>
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password1">Password</label>
                 <input
+                  required
                   type="password"
                   className="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={this.handleInputChange}/>
+                  id="password1"
+                  name="password1"
+                  placeholder="Password"/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password2">Password Confirmation</label>
+                <input
+                  required
+                  type="password"
+                  className="form-control"
+                  id="password2"
+                  name="password2"
+                  placeholder="Password Confirmation"/>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
