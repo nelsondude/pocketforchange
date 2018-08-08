@@ -6,17 +6,19 @@ class Registration extends React.Component {
   state = {
     access_token: '',
     item_id: '',
+    name: '',
+    email: '',
+    password: '',
   };
 
   submitHandler = (event) => {
     event.preventDefault();
-    alert('form submitted');
+    console.log(this.state);
   };
 
   handleOnSuccess = (token, metadata) => {
     axios.post('/plaid/get_access_token/', {'token': token})
       .then(res => {
-        console.log(res);
         this.setState({
           access_token: res.data.access_token,
           item_id: res.data.item_id
@@ -31,6 +33,15 @@ class Registration extends React.Component {
     alert('exiting ...');
   };
 
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
     return (
       <div className='Registration'>
@@ -39,18 +50,35 @@ class Registration extends React.Component {
             <form action="" onSubmit={this.submitHandler}>
               <div className="form-group">
                 <label htmlFor="name">Full Name</label>
-                <input type="text" className="form-control" id="name"/>
+                <input
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="John Smith"
+                  onChange={this.handleInputChange}/>
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email address</label>
-                <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
-                       placeholder="Enter email"/>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  onChange={this.handleInputChange}/>
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.
                 </small>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" placeholder="Password"/>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleInputChange}/>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
