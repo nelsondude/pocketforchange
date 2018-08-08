@@ -32,43 +32,37 @@ class Registration extends React.Component {
     alert('exiting ...');
   };
 
-  getTransactions = () => {
-    if (this.state.access_token !== '') {
-      axios.post('/plaid/transactions/', {'access_token': this.state.access_token})
-        .then(res => {
-          console.log(res);
-        })
-    }
-  };
-
   render() {
     return (
-      <Fragment>
-        <h1>Register to be a Donator!!!</h1>
-        <form action="" onSubmit={this.submitHandler}>
-          <div className="form-group">
-            <label htmlFor="name">Full Name</label>
-            <input type="text" className="form-control" id="name"/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
-                   placeholder="Enter email"/>
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" id="password" placeholder="Password"/>
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+      <div className='Registration'>
+        <div className="row">
+          <div className="col-xs-12">
+            <form action="" onSubmit={this.submitHandler}>
+              <div className="form-group">
+                <label htmlFor="name">Full Name</label>
+                <input type="text" className="form-control" id="name"/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email address</label>
+                <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
+                       placeholder="Enter email"/>
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.
+                </small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input type="password" className="form-control" id="password" placeholder="Password"/>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
 
-        <BankConnect
-          message={'Open Link and connect to your bank!'}
-          onSuccess={this.handleOnSuccess}
-          onExit={this.handleOnExit}/>
-        <Button clicked={this.getTransactions}>Get Transactions</Button>
-      </Fragment>
+            <BankConnect
+              message={'Open Link and connect to your bank!'}
+              onSuccess={this.handleOnSuccess}
+              onExit={this.handleOnExit}/>
+          </div>
+        </div>
+      </div>
     )
   }
 }
