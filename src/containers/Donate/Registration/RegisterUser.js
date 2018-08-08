@@ -1,11 +1,7 @@
 import React from 'react';
-import BankConnect from 'components/BankConnect/BankConnect';
-import axios from 'axios-instance';
 
-class Registration extends React.Component {
+class RegisterUser extends React.Component {
   state = {
-    access_token: '',
-    item_id: '',
     name: '',
     email: '',
     password: '',
@@ -14,20 +10,6 @@ class Registration extends React.Component {
   submitHandler = (event) => {
     event.preventDefault();
     console.log(this.state);
-  };
-
-  handleOnSuccess = (token) => {
-    axios.post('/plaid/get_access_token/', {'token': token})
-      .then(_ => {
-        console.log('Successfully saved access/id tokens')
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  handleOnExit = () => {
-    alert('exiting ...');
   };
 
   handleInputChange = (event) => {
@@ -79,11 +61,6 @@ class Registration extends React.Component {
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-
-            <BankConnect
-              message={'Open Link and connect to your bank!'}
-              onSuccess={this.handleOnSuccess}
-              onExit={this.handleOnExit}/>
           </div>
         </div>
       </div>
@@ -91,4 +68,4 @@ class Registration extends React.Component {
   }
 }
 
-export default Registration;
+export default RegisterUser;
