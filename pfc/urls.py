@@ -1,16 +1,17 @@
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
-from django.conf import settings
+from rest_framework_jwt.views import obtain_jwt_token
 
 from .views import FrontendView
 
-from django.conf.urls import handler400, handler403, handler404, handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('donate/', include('donate.urls')),
     path('plaid/', include('plaid_auth.urls')),
+    path('api-token-auth/', obtain_jwt_token),
     re_path('.*', FrontendView.as_view()),
 ]
 

@@ -46,8 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Libraries
     'corsheaders',
     'rest_framework',
+
+    # Apps
+    'accounts',
+    'donate',
+    'plaid_auth'
 ]
 
 MIDDLEWARE = [
@@ -144,6 +150,21 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Rest Framework Config
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+# Custom Users
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Configure Django App for Heroku.
 import django_heroku

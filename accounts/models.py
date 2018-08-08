@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     # add additional fields in here
 
     def __str__(self):
