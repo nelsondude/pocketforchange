@@ -1,7 +1,6 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import BankConnect from 'components/BankConnect/BankConnect';
 import axios from 'axios-instance';
-import Button from 'components/Button/Button';
 
 class Registration extends React.Component {
   state = {
