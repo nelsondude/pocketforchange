@@ -1,29 +1,95 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import BankConnect from 'components/BankConnect/BankConnect';
 import axios from 'axios-instance';
 
 class Registration extends React.Component {
+  state = {
+    access_token: '',
+    item_id: '',
+    name: '',
+    email: '',
+    password: '',
+  };
 
   submitHandler = (event) => {
     event.preventDefault();
-    axios.get('/donate/users/')
+    console.log(this.state);
+  };
+
+  handleOnSuccess = (token, metadata) => {
+    axios.post('/plaid/get_access_token/', {'token': token})
       .then(res => {
-        console.log(res)
+        this.setState({
+          access_token: res.data.access_token,
+          item_id: res.data.item_id
+        })
       })
       .catch(err => {
         console.log(err);
       });
   };
 
+  handleOnExit = () => {
+    alert('exiting ...');
+  };
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
     return (
-      <Fragment>
-        <h1>Register to be a Donator!!!</h1>
-        <form action="" onSubmit={this.submitHandler}>
-          <label htmlFor="name">Name</label>
-          <input id="name" type="text"/>
-          <input type="submit" value="Submit" />
-        </form>
-      </Fragment>
+      <div className='Registration'>
+        <div className="row">
+          <div className="col-xs-12">
+            <form action="" onSubmit={this.submitHandler}>
+              <div className="form-group">
+                <label htmlFor="name">Full Name</label>
+                <input
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="John Smith"
+                  onChange={this.handleInputChange}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email address</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  onChange={this.handleInputChange}/>
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.
+                </small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleInputChange}/>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+
+            <BankConnect
+              message={'Open Link and connect to your bank!'}
+              onSuccess={this.handleOnSuccess}
+              onExit={this.handleOnExit}/>
+          </div>
+        </div>
+      </div>
     )
   }
 }

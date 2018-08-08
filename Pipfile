@@ -16,6 +16,7 @@ gunicorn = "*"
 pytest-django = "*"
 pip = "*"
 django-cors-headers = "*"
+plaid-python = "*"
 
 [requires]
 python_version = "3.6"

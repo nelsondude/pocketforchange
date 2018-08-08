@@ -1,3 +1,5 @@
 node_modules/
 .env
 .pytest_cache/
+src/**/*.css
+build/
