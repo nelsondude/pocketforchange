@@ -25,7 +25,9 @@ SECRET_KEY = 'vx60sqq(hz5xk+kb_*lhgp@9y5wzzp)cmux04fssz=ct^_3hyu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+CSRF_COOKIE_SECURE = False
 
 
 # Application definition
@@ -117,9 +119,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Django CORS
-CORS_ORIGIN_ALLOW_ALL = True
 
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = (
+    'Access-Control-Allow-Origin: *',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
