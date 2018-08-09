@@ -14,5 +14,5 @@ class RegisterUser(CreateAPIView):
         form = CustomUserCreationForm(self.request.POST)
         if form.is_valid():
             form.save()
-            return Response(status=200)
-        return Response(form.errors, status=200)
+            return Response({'success': True, 'errors': []}, status=200)
+        return Response({'success': False, 'errors': form.errors}, status=200)

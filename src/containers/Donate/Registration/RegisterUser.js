@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios-instance';
+import {withRouter} from 'react-router-dom';
 
 class RegisterUser extends React.Component {
   state = {
@@ -16,6 +17,8 @@ class RegisterUser extends React.Component {
       .then(res => {
         if (res != null) {
           alert('Something went wrong! Please try again.')
+        } else {
+          //  Get json web token
         }
       })
       .catch(err => {
@@ -30,6 +33,10 @@ class RegisterUser extends React.Component {
     this.setState({
       [name]: value
     });
+  };
+
+  bankClickedHandler = () => {
+    this.props.history.push('/donator/setup-bank/')
   };
 
   render() {
@@ -82,6 +89,7 @@ class RegisterUser extends React.Component {
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            <button className="btn btn-success" onClick={this.bankClickedHandler}>Go To Bank Setup</button>
           </div>
         </div>
       </div>
@@ -89,4 +97,4 @@ class RegisterUser extends React.Component {
   }
 }
 
-export default RegisterUser;
+export default withRouter(RegisterUser);

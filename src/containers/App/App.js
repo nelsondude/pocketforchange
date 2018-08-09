@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Home from 'containers/Home/Home';
 import RegisterUser from 'containers/Donate/Registration/RegisterUser';
+import RegisterBank from 'containers/Donate/Registration/RegisterBank';
 import Layout from 'containers/Layout/Layout';
 import NotFound from 'containers/NotFound/NotFound';
 import './App.css';
@@ -14,6 +15,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/donator/register" component={RegisterUser}/>
+            <Route exact path="/donator/setup-bank/" component={RegisterBank}/>s
             <Route component={NotFound}/>
           </Switch>
         </Layout>
