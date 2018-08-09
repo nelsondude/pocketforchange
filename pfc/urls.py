@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
+from rest_framework_jwt.views import (obtain_jwt_token, refresh_jwt_token,
+                                      verify_jwt_token)
 
 from .views import FrontendView
 

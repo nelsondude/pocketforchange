@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from plaid_auth.models import PlaidItem
@@ -25,7 +26,6 @@ client = plaid.Client(
 
 
 class GetAccessToken(APIView):
-    permission_classes = [AllowAny]
     def post(self, *args, **kwargs):
         public_token = self.request.data.get('token', '')
         exchange_response = client.Item.public_token.exchange(public_token)
@@ -33,9 +33,18 @@ class GetAccessToken(APIView):
         item_id = exchange_response['item_id']
         plaid_item, created = PlaidItem.objects.get_or_create(
             access_token=access_token, item_id=item_id, user=self.request.user)
-        return JsonResponse({'created': created})
+        return Response({'created': created})
     def get(self):
         raise Http404
+
+
+class CreatePublicToken(APIView):
+    def post(self, *args, **kwargs):
+        user = self.request.user
+        plaid_item = PlaidItem.objects.filter(user=user).first()
+        response = client.Item.public_token.create(plaid_item.access_token)
+        return Response(response)
+
 
 
 @csrf_exempt
