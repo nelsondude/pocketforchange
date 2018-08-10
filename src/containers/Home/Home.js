@@ -1,29 +1,21 @@
 import React from 'react';
-import Button from 'components/Button/Button';
-import { withRouter } from 'react-router-dom';
+import Signup from './Signup/Signup';
+import Dashboard from './Dashboard/Dashboard';
 
 
 class Home extends React.Component {
 
-  handleRegister = () => {
-    this.props.history.push('/donator/register');
-  };
-
   render() {
     return (
       <div>
-        <h1>Pocket for Change Home</h1>
-        <div className="col-sm-6">
-          <h1 className="text-center">Organizations</h1>
-          <Button>Set one up!</Button>
+        <div className="jumbotron">
+          <h1 className="display-4">Pocket for Change Home</h1>
+          <p class="lead">Lets see some donations :)</p>
         </div>
-        <div className="col-sm-6">
-          <h1 className="text-center">Donators</h1>
-          <Button clicked={this.handleRegister}>Register</Button>
-        </div>
+        {localStorage.getItem('token') ? <Dashboard/> : <Signup/>}
       </div>
     )
   }
 }
 
-export default withRouter(Home);
+export default Home;

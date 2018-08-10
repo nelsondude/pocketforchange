@@ -23,12 +23,8 @@ class RegisterUser extends React.Component {
         }
       })
       .catch(err => {
-        console.log('Couldnt register the user')
+        console.log('Could\'t register the user')
       });
-  };
-
-  bankClickedHandler = () => {
-    this.props.history.push('/donator/setup-bank/')
   };
 
   render() {
@@ -81,7 +77,6 @@ class RegisterUser extends React.Component {
               </div>
               <button type="submit" className="btn btn-primary">Register</button>
             </form>
-            <button className="btn btn-success" onClick={this.bankClickedHandler}>Go To Bank Setup</button>
           </div>
         </div>
       </div>
