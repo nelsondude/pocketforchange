@@ -6,9 +6,14 @@ import {withRouter} from "react-router";
 
 class navbar extends React.Component {
 
+  state = {
+    loggedIn: localStorage.getItem('token') !== ''
+  };
+
   loggedInStatusHandler = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
+      this.setState({loggedIn: false})
     } else {
       this.props.history.push('/login');
     }

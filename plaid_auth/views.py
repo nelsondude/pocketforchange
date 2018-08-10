@@ -1,21 +1,13 @@
-import plaid
-import json
 import datetime
-from django.http import JsonResponse
+
+import plaid
 from django.http import Http404
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from pfc.constants import (PLAID_CLIENT_ID, PLAID_ENV, PLAID_PUBLIC_KEY,
+                           PLAID_SECRET)
 from plaid_auth.models import PlaidItem
-
-from pfc.constants import (
-    PLAID_CLIENT_ID,
-    PLAID_ENV,
-    PLAID_PUBLIC_KEY,
-    PLAID_SECRET
-)
 
 
 client = plaid.Client(
@@ -46,17 +38,16 @@ class CreatePublicToken(APIView):
         return Response(response)
 
 
-
-@csrf_exempt
-def transactions(request):
-    data = json.loads(request.body.decode('utf-8'))
-    access_token = data.get('access_token', '')
-    start_date = "{:%Y-%m-%d}".format(
-        datetime.datetime.now() + datetime.timedelta(-30))
-    end_date = "{:%Y-%m-%d}".format(datetime.datetime.now())
-    try:
-        response = client.Transactions.get(access_token, start_date, end_date)
-        return JsonResponse(response)
-    except plaid.errors.PlaidError as e:
-        return JsonResponse(
-            {'error': {'error_code': e.code, 'error_message': str(e)}})
+class ListTransactions(APIView):
+    def get(self, *args, **kwargs):
+        plaid_item = PlaidItem.objects.filter(user=self.request.user).first()
+        start_date = "{:%Y-%m-%d}".format(
+            datetime.datetime.now() + datetime.timedelta(-30))
+        end_date = "{:%Y-%m-%d}".format(datetime.datetime.now())
+        try:
+            response = client.Transactions\
+                .get(plaid_item.access_token, start_date, end_date)
+            return Response(response)
+        except plaid.errors.PlaidError as e:
+            return Response(
+                {'error': {'error_code': e.code, 'error_message': str(e)}})

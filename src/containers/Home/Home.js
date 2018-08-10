@@ -10,7 +10,7 @@ class Home extends React.Component {
       <div>
         <div className="jumbotron">
           <h1 className="display-4">Pocket for Change Home</h1>
-          <p class="lead">Lets see some donations :)</p>
+          <p className="lead">Lets see some donations :)</p>
         </div>
         {localStorage.getItem('token') ? <Dashboard/> : <Signup/>}
       </div>
