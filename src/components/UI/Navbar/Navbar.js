@@ -35,7 +35,7 @@ class navbar extends React.Component {
                 Account Setup
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/donate/register/'}>
+            <LinkContainer to={'/donator/register/'}>
               <NavItem eventKey={2} href="#">
                 Register
               </NavItem>

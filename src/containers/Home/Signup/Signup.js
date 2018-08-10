@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {withRouter} from "react-router-dom";
 
 class Signup extends React.Component {
 
@@ -26,4 +27,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);
