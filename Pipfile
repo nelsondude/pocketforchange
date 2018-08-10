@@ -17,6 +17,7 @@ pytest-django = "*"
 pip = "*"
 django-cors-headers = "*"
 plaid-python = "*"
+djangorestframework-jwt = "*"
 
 [requires]
 python_version = "3.6"

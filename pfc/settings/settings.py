@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import datetime
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'vx60sqq(hz5xk+kb_*lhgp@9y5wzzp)cmux04fssz=ct^_3hyu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ENV = os.getenv('PFC_ENV')
+if ENV == 'development':
+    DEBUG = True
+elif ENV == 'production':
+    DEBUG = False
+else:
+    raise RuntimeError('PFC_ENV variable not set')
 
 ALLOWED_HOSTS = ["*"]
 
@@ -40,8 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Libraries
     'corsheaders',
     'rest_framework',
+
+    # Apps
+    'accounts',
+    'donate',
+    'plaid_auth'
 ]
 
 MIDDLEWARE = [
@@ -139,6 +151,29 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# Rest Framework Config
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+# Custom Users
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# JWT Config
+JWT_AUTH = {
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_VERIFY_EXPIRATION': False,  # TODO Set refresh jwt tokens
+}
+
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
