@@ -29,10 +29,7 @@ const navbar = () => {
         </Nav>
         <Nav pullRight>
           <NavItem eventKey={1} href="#">
-            Link Right
-          </NavItem>
-          <NavItem eventKey={2} href="#">
-            Link Right
+            {localStorage.getItem('token') ? 'Logged In' : 'Logged Out'}
           </NavItem>
         </Nav>
       </Navbar.Collapse>

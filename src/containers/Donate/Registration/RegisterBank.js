@@ -20,11 +20,13 @@ class RegisterBank extends React.Component {
 
   render() {
     return (
-      <div>
-        <BankConnect
-          message={'Open Link and connect to your bank!'}
-          onSuccess={this.handleOnSuccess}
-          onExit={this.handleOnExit}/>
+      <div className="row">
+        <div className="col-xs-6 col-xs-offset-3 text-center">
+          <BankConnect
+            message={'Open Link and connect to your bank!'}
+            onSuccess={this.handleOnSuccess}
+            onExit={this.handleOnExit}/>
+        </div>
       </div>
     )
   }

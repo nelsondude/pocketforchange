@@ -15,24 +15,16 @@ class RegisterUser extends React.Component {
     const data = new FormData(event.target);
     axios.post('/accounts/register/', data)
       .then(res => {
-        if (res != null) {
-          alert('Something went wrong! Please try again.')
+        if (res.data.success) {
+          localStorage.setItem('token', res.data.token);
+          this.props.history.push('/donator/setup-bank/')
         } else {
-          //  Get json web token
+          console.log('failure');
         }
       })
       .catch(err => {
         console.log('Couldnt register the user')
       });
-  };
-
-  handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
   };
 
   bankClickedHandler = () => {
@@ -87,7 +79,7 @@ class RegisterUser extends React.Component {
                   name="password2"
                   placeholder="Password Confirmation"/>
               </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-primary">Register</button>
             </form>
             <button className="btn btn-success" onClick={this.bankClickedHandler}>Go To Bank Setup</button>
           </div>

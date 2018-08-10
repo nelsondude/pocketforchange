@@ -10,6 +10,8 @@ export default (props) => (
       product={["auth", "transactions"]}
       onExit={props.onExit}
       onSuccess={props.onSuccess}
-      className="BankConnect"
+      className="btn btn-primary"
+      style={null}
+      id="BankConnect"
     >{props.message}</PlaidLink>
 );
