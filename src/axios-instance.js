@@ -4,7 +4,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 let axios_args = {
-  baseURL: 'http://0.0.0.0:8000',
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://0.0.0.0:8000',
 };
 
 if (localStorage.getItem('token')) {
