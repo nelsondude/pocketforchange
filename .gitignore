@@ -3,3 +3,4 @@ node_modules/
 .pytest_cache/
 src/**/*.css
 build/
+staticfiles/
