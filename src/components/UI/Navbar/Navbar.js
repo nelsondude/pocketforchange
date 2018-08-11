@@ -21,7 +21,7 @@ class navbar extends React.Component {
 
   render() {
     return (
-      <Navbar>
+      <Navbar fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Pocket for Change</Link>
