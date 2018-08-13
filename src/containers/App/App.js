@@ -4,8 +4,9 @@ import Landing from 'containers/Landing/Landing';
 import RegisterUser from 'containers/Registration/RegisterUser';
 import Layout from 'containers/Layout/Layout';
 import NotFound from 'containers/NotFound/NotFound';
-import Login from 'containers/Donate/Login/Login';
+import Login from 'containers/Login/Login';
 import Dashboard from 'containers/Dashboard/Dashboard';
+import {connect} from 'react-redux';
 import './App.css';
 
 class App extends Component {
@@ -26,4 +27,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

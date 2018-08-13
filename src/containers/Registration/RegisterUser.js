@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios-instance';
-import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class RegisterUser extends React.Component {
   state = {
@@ -84,4 +84,12 @@ class RegisterUser extends React.Component {
   }
 }
 
-export default withRouter(RegisterUser);
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterUser);

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios-instance';
+import {connect} from 'react-redux';
 
 class Dashboard extends React.Component {
 
@@ -41,4 +42,12 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

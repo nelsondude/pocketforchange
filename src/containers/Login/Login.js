@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios-instance';
+import {connect} from 'react-redux';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
   loginHandler = (event) => {
     event.preventDefault();
@@ -46,3 +47,13 @@ export default class Login extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

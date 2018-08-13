@@ -1,6 +1,6 @@
 import React from 'react';
-import {withRouter} from "react-router-dom";
 import {Buffer} from "components/index";
+import {connect} from 'react-redux';
 import './Landing.css';
 
 class Landing extends React.Component {
@@ -53,4 +53,12 @@ class Landing extends React.Component {
   }
 }
 
-export default withRouter(Landing);
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
