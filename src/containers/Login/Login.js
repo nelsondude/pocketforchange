@@ -1,8 +1,25 @@
 import React from 'react';
 import axios from 'axios-instance';
 import {connect} from 'react-redux';
+import {Input} from "../../components";
 
 class Login extends React.Component {
+
+  state = {
+    inputs: [
+      {
+        name: 'username',
+        placeholder: 'Username',
+        label: 'Username'
+      },
+      {
+        name: 'password',
+        placeholder: 'Enter Password',
+        label: 'Password',
+        type: 'password'
+      }
+    ]
+  };
 
   loginHandler = (event) => {
     event.preventDefault();
@@ -22,25 +39,9 @@ class Login extends React.Component {
     return (
       <div>
         <form action="" onSubmit={this.loginHandler}>
-          <div className="form-group">
-            <label htmlFor="name">Username</label>
-            <input
-              required
-              className="form-control"
-              id="username"
-              name="username"
-              placeholder="Username"/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              required
-              className="form-control"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter password"/>
-          </div>
+          {this.state.inputs.map(options => (
+            <Input {...options}/>
+          ))}
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
       </div>
