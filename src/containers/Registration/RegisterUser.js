@@ -55,8 +55,8 @@ class RegisterUser extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <form action="" onSubmit={this.submitHandler}>
-              {this.state.inputs.map(options => (
-                <Input {...options} />
+              {this.state.inputs.map((options, index) => (
+                <Input key={index}  {...options} />
               ))}
               <button type="submit" className="btn btn-primary">Register</button>
             </form>

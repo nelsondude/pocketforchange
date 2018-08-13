@@ -39,8 +39,8 @@ class Login extends React.Component {
     return (
       <div>
         <form action="" onSubmit={this.loginHandler}>
-          {this.state.inputs.map(options => (
-            <Input {...options}/>
+          {this.state.inputs.map((options, index) => (
+            <Input key={index} {...options}/>
           ))}
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
