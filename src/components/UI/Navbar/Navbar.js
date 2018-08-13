@@ -23,7 +23,7 @@ class navbar extends React.Component {
   render() {
     return (
       <div className="NavbarWrapper">
-        <Navbar fixedTop>
+        <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">PFC</Link>

@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {withRouter} from "react-router-dom";
-import {Buffer} from "components";
-import './Signup.css';
+import {Buffer} from "components/index";
+import './Landing.css';
 
-class Signup extends React.Component {
+class Landing extends React.Component {
   state = {
     images: [
       'https://upload.wikimedia.org/wikipedia/commons/b/bb/American_Red_Cross_Logo.svg',
@@ -41,8 +41,8 @@ class Signup extends React.Component {
           <div className="col-xs-12 text-center">
             <small className="text-muted">Trusted by more then 1000 charities worldwide.</small>
             <div className="landing-images">
-              {this.state.images.map(url => (
-                <img src={url} alt=""/>
+              {this.state.images.map((url, i) => (
+                <img key={i} src={url} alt=""/>
               ))}
             </div>
           </div>
@@ -53,4 +53,4 @@ class Signup extends React.Component {
   }
 }
 
-export default withRouter(Signup);
+export default withRouter(Landing);

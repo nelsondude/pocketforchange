@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Home from 'containers/Home/Home';
-import RegisterUser from 'containers/Donate/Registration/RegisterUser';
-import RegisterBank from 'containers/Donate/Registration/RegisterBank';
+import Landing from 'containers/Landing/Landing';
+import RegisterUser from 'containers/Registration/RegisterUser';
 import Layout from 'containers/Layout/Layout';
 import NotFound from 'containers/NotFound/NotFound';
 import Login from 'containers/Donate/Login/Login';
-import Dashboard from 'containers/Home/Dashboard/Dashboard';
+import Dashboard from 'containers/Dashboard/Dashboard';
 import './App.css';
 
 class App extends Component {
@@ -15,9 +14,8 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={Landing}/>
             <Route exact path="/get-started/" component={RegisterUser}/>
-            <Route exact path="/donator/setup-bank/" component={RegisterBank}/>
             <Route exact path="/login/" component={Login}/>
             <Route exact path="/dashboard/" component={Dashboard}/>
             <Route component={NotFound}/>
