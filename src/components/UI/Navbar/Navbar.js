@@ -7,17 +7,8 @@ import './Navbar.css';
 
 class CustomNavbar extends React.Component {
 
-  state = {
-    loggedIn: localStorage.getItem('token') !== ''
-  };
-
   loggedInStatusHandler = () => {
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token');
-      this.setState({loggedIn: false})
-    } else {
-      // this.props.history.push('/login');
-    }
+    console.log(this.props)
   };
 
   render() {
