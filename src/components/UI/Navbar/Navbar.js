@@ -1,62 +1,72 @@
 import React from 'react';
-import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
+import {Nav, Navbar, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap';
+import {connect} from 'react-redux';
+import './Navbar.css';
+import {LOGOUT} from "../../../store/actions";
 import {withRouter} from "react-router";
 
-class navbar extends React.Component {
-
-  state = {
-    loggedIn: localStorage.getItem('token') !== ''
-  };
+class CustomNavbar extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('navbar', props);
+  }
 
   loggedInStatusHandler = () => {
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token');
-      this.setState({loggedIn: false})
+    if (this.props.loggedIn) {
+      this.props.logout();
     } else {
-      this.props.history.push('/login');
+      this.props.history.push('/login/');
     }
   };
 
   render() {
     return (
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Pocket for Change</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle/>
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={'/donator/setup-bank/'}>
-              <NavItem eventKey={1} href="#">
-                Account Setup
+      <div className="NavbarWrapper">
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/">PFC</Link>
+            </Navbar.Brand>
+            <Navbar.Toggle/>
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <LinkContainer to={'/donator/setup-bank/'}>
+                <NavItem eventKey={1} href="#">
+                  Account Setup
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to={'/get-started/'}>
+                <NavItem eventKey={2} href="#">
+                  Register
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to={'/dashboard/'}>
+                <NavItem eventKey={4} href="#">
+                  Dashboard
+                </NavItem>
+              </LinkContainer>
+            </Nav>
+            <Nav pullRight>
+              <NavItem eventKey={1} onClick={this.loggedInStatusHandler}>
+                {this.props.loggedIn ? 'Log Out' : 'Login'}
               </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/donator/register/'}>
-              <NavItem eventKey={2} href="#">
-                Register
-              </NavItem>
-            </LinkContainer>
-            <NavDropdown eventKey={3} title="Drop" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-              <MenuItem divider/>
-              <MenuItem eventKey={3.4}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav>
-          <Nav pullRight>
-            <NavItem eventKey={1} onClick={this.loggedInStatusHandler}>
-              {localStorage.getItem('token') ? 'Log Out' : 'Login'}
-            </NavItem>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
     )
   }
 }
 
-export default withRouter(navbar);
+const mapStateToProps = state => ({
+  loggedIn: state.auth.loggedIn
+});
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch({type: LOGOUT})
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CustomNavbar));

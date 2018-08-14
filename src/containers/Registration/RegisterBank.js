@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from "axios-instance";
 import BankConnect from "components/BankConnect/BankConnect";
+import {connect} from 'react-redux';
 
 class RegisterBank extends React.Component {
 
@@ -32,4 +33,12 @@ class RegisterBank extends React.Component {
   }
 }
 
-export default RegisterBank;
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterBank);
