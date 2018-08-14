@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
         <div className="row">
           <h3 className="text-center">All Recent Transactions</h3>
           <ul className="list-group">
-            {this.state.transactions.length > 0  ? this.state.transactions.map((value, i) => (
+            {this.state.transactions && this.state.transactions.length > 0 ? this.state.transactions.map((value, i) => (
               <li className="list-group-item" key={i}>
                 {value.name} | <b>${value.amount.toFixed(2)}</b>
               </li>
