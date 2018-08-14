@@ -10,7 +10,7 @@ class PlaidItem(models.Model):
     item_id = models.CharField(max_length=100, null=False)
     environment = models.CharField(
         max_length=100,
-        default=os.getenv('REACT_APP_PLAID_ENV', 'development'),
+        default=os.getenv('REACT_APP_PLAID_ENV', 'sandbox'),
         null=False)
     date_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(
