@@ -4,11 +4,21 @@ import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from 'react-redux';
 import './Navbar.css';
+import {LOGOUT} from "../../../store/actions";
+import {withRouter} from "react-router";
 
 class CustomNavbar extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('navbar', props);
+  }
 
   loggedInStatusHandler = () => {
-    console.log(this.props)
+    if (this.props.loggedIn) {
+      this.props.logout();
+    } else {
+      this.props.history.push('/login/');
+    }
   };
 
   render() {
@@ -41,7 +51,7 @@ class CustomNavbar extends React.Component {
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} onClick={this.loggedInStatusHandler}>
-                {localStorage.getItem('token') ? 'Log Out' : 'Login'}
+                {this.props.loggedIn ? 'Log Out' : 'Login'}
               </NavItem>
             </Nav>
           </Navbar.Collapse>
@@ -52,11 +62,11 @@ class CustomNavbar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ...state
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...dispatch
+  logout: () => dispatch({type: LOGOUT})
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomNavbar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CustomNavbar));

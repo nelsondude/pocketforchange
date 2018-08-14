@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios-instance';
 import {connect} from 'react-redux';
 import {Input} from "../../components";
+import {LOGIN, LOGOUT} from "../../store/actions";
+import {withRouter} from "react-router";
 
 class Login extends React.Component {
 
@@ -28,6 +30,8 @@ class Login extends React.Component {
       .then(res => {
         if (res.status === 200) {
           localStorage.setItem('token', res.data.token);
+          this.props.login(res.data.token);
+          this.props.history.push('/dashboard/');
         }
       })
       .catch(err => {
@@ -54,7 +58,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...dispatch
+  login: (token) => dispatch({type: LOGIN, token: token}),
+  logout: () => dispatch({type: LOGOUT})
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
