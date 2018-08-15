@@ -2,6 +2,8 @@ import React, {Fragment} from 'react';
 import ReactTable from 'react-table'
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+import {OverlayTrigger, Tooltip} from "react-bootstrap";
+import {Buffer} from "../../components";
 
 class Dashboard extends React.Component {
 
@@ -34,10 +36,17 @@ class Dashboard extends React.Component {
       ]
     },
     todo: [{
+      id: 1,
       label: 'SETUP BANK ACCOUNT',
       url: '/add-bank-account'
     }]
 
+  };
+
+  handleDismiss = (index) => {
+    let todo = [...this.state.todo];
+    todo.splice(index, 1);
+    this.setState({todo: todo});
   };
 
   componentDidMount() {
@@ -58,12 +67,24 @@ class Dashboard extends React.Component {
               columns={this.state.organizations.columns}/>
           </div>
         </div>
+        <Buffer/>
         <div className="row">
           <div className="col-sm-6">
-            <h3>Outstanding Items to Complete</h3>
+            <h4>Outstanding Items</h4>
             <div className="list-group">
               {this.state.todo.map((item, i) => (
-                <Link className={'list-group-item list-group-item-action'} key={i} to={item.url}>{item.label}</Link>
+                <li key={i} className="list-group-item">
+                  <Link to={item.url}>{item.label}</Link>
+                  <OverlayTrigger placement="top" overlay={
+                    <Tooltip id={i + item.label}>
+                      <strong>Dismiss this message.</strong>
+                    </Tooltip>}>
+
+                    <button type="button" className="close" aria-label="Close" onClick={() => this.handleDismiss(i)}>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </OverlayTrigger>
+                </li>
               ))}
             </div>
           </div>
