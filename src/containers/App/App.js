@@ -9,6 +9,7 @@ import Dashboard from 'containers/Dashboard/Dashboard';
 import {connect} from 'react-redux';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import './App.css';
+import Search from "containers/Search/Search";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route exact path="/" component={Landing}/>
             <Route exact path="/get-started/" component={RegisterUser}/>
             <Route exact path="/login/" component={Login}/>
+            <Route exact path="/search/" component={Search}/>
             <PrivateRoute exact loggedIn={this.props.auth.loggedIn} path="/dashboard/" component={Dashboard}/>
             <Route component={NotFound}/>
           </Switch>

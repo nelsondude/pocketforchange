@@ -1,5 +1,5 @@
 import React from 'react';
-import {Nav, Navbar, NavItem} from 'react-bootstrap';
+import {Button, FormControl, FormGroup, Nav, Navbar, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from 'react-redux';
@@ -21,6 +21,10 @@ class CustomNavbar extends React.Component {
     }
   };
 
+  searchHandler = (event) => {
+    console.log(event);
+  }
+
   render() {
     return (
       <div className="NavbarWrapper">
@@ -32,6 +36,12 @@ class CustomNavbar extends React.Component {
             <Navbar.Toggle/>
           </Navbar.Header>
           <Navbar.Collapse>
+            <Navbar.Form pullLeft>
+              <FormGroup>
+                <FormControl type="text" placeholder="Search"/>
+              </FormGroup>
+              <Button type="submit" onClick={this.searchHandler}>Submit</Button>
+            </Navbar.Form>
             <Nav>
               <LinkContainer to={'/donator/setup-bank/'}>
                 <NavItem eventKey={1} href="#">
