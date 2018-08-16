@@ -1,6 +1,7 @@
 import React from 'react';
 import {Buffer} from "components/index";
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import './Landing.css';
 
 class Landing extends React.Component {
@@ -34,6 +35,8 @@ class Landing extends React.Component {
         <div className="row">
           <div className="col-xs-12 text-center">
             <button className="btn btn-success" onClick={this.handleGetStarted}>Get Started Today</button>
+            <br/>
+            <small>Already have an account? <Link to={'/login/'}>Login here.</Link></small>
           </div>
         </div>
         <Buffer/>
