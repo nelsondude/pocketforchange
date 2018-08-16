@@ -2,6 +2,7 @@ import React from 'react';
 import {Buffer} from "components/index";
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import Footer from 'components/Footer/Footer';
 import './Landing.css';
 
 class Landing extends React.Component {
@@ -50,6 +51,7 @@ class Landing extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
 
       </div>
     )

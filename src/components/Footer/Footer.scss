@@ -1,0 +1,22 @@
+.Footer {
+  margin-top: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 6.5rem;
+  background-color: #f1f5f9;
+  border-top: 1px #d5dadf solid;
+  .links {
+    overflow: auto;
+    padding: 1.5rem 0;
+  }
+  li {
+    list-style-type: none;
+    font-size: 14px;
+    line-height: 30px;
+  }
+  .logo {
+    max-width: 120px;
+    width: 100%;
+  }
+}
