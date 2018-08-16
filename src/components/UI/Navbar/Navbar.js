@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, FormControl, FormGroup, Nav, Navbar, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from 'react-redux';
 import './Navbar.css';
 import {LOGOUT} from "../../../store/actions";
@@ -43,21 +42,7 @@ class CustomNavbar extends React.Component {
               <Button type="submit" onClick={this.searchHandler}>Submit</Button>
             </Navbar.Form>
             <Nav>
-              <LinkContainer to={'/donator/setup-bank/'}>
-                <NavItem eventKey={1} href="#">
-                  Account Setup
-                </NavItem>
-              </LinkContainer>
-              <LinkContainer to={'/get-started/'}>
-                <NavItem eventKey={2} href="#">
-                  Register
-                </NavItem>
-              </LinkContainer>
-              <LinkContainer to={'/dashboard/'}>
-                <NavItem eventKey={4} href="#">
-                  Dashboard
-                </NavItem>
-              </LinkContainer>
+
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} onClick={this.loggedInStatusHandler}>
