@@ -23,6 +23,7 @@ class CustomNavbar extends React.Component {
 
   loggedInStatusHandler = () => {
     if (this.props.loggedIn) {
+      this.props.history.push('/');
       this.props.logout();
     } else {
       this.props.history.push('/login/');
