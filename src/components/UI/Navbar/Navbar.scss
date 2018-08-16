@@ -1,3 +1,12 @@
+@import 'styles/colors.scss';
+
 .NavbarWrapper {
   margin-bottom: 0;
+  background-color: $carmine;
+  nav {
+    background-image: linear-gradient($carmine, $crimson);
+    a, .navbar-default, .navbar-brand {
+      color: white !important;
+    }
+  }
 }
