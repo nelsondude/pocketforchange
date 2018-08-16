@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios-instance';
 import {connect} from 'react-redux';
 import {Buffer, Inputs} from 'components';
+import {LOGIN} from "store/actions";
 
 
 class RegisterUser extends React.Component {
@@ -39,8 +40,7 @@ class RegisterUser extends React.Component {
     axios.post('/accounts/register/', data)
       .then(res => {
         if (res.data.success) {
-          localStorage.setItem('token', res.data.token);
-          this.props.history.push('/donator/setup-bank/')
+          this.props.login();
         } else {
           console.log('failure');
         }
@@ -72,5 +72,9 @@ const mapStateToProps = state => ({
   ...state
 });
 
+const mapDispatchToProps = dispatch => ({
+  login: (token) => dispatch({type: LOGIN, token: token}),
+});
 
-export default connect(mapStateToProps, null)(RegisterUser);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterUser);

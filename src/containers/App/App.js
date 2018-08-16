@@ -18,7 +18,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <PublicRoute exact loggedIn={this.props.auth.loggedIn} path="/" component={Landing}/>
-            <Route exact path="/get-started/" component={RegisterUser}/>
+            <PublicRoute exact loggedIn={this.props.auth.loggedIn} path="/get-started/" component={RegisterUser}/>
             <Route exact path="/login/" component={Login}/>
             <Route exact path="/search/" component={Search}/>
             <PrivateRoute exact loggedIn={this.props.auth.loggedIn} path="/dashboard/" component={Dashboard}/>
