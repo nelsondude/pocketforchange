@@ -29,25 +29,8 @@ class RegisterUser extends React.Component {
         placeholder: 'Confirm Password',
         label: 'Password Again',
         type: 'password'
-      },
-      {
-        name: 'is_org',
-        type: 'checkbox',
-        label: 'Are you an organization?   ',
-        input_class: 'form-check-input',
-        label_class: 'form-check-label',
-        classes: ['form-check'],
-        onChange: (event) => this.setState({showRegisterOrg: event.target.checked})
       }
     ],
-    showRegisterOrg: false,
-    orgInputs: [
-      {
-        name: 'org_name',
-        placeholder: 'Name of your organization',
-        label: 'Organization/Charity Name'
-      }
-    ]
   };
 
   submitHandler = (event) => {
@@ -74,7 +57,6 @@ class RegisterUser extends React.Component {
           <div className="col-xs-12">
             <form action="" onSubmit={this.submitHandler}>
               <Inputs inputs={this.state.inputs} />
-              {this.state.showRegisterOrg ? <Inputs inputs={this.state.orgInputs} /> : null}
               <button type="submit" className="btn btn-primary">Register</button>
             </form>
           </div>
@@ -88,8 +70,5 @@ const mapStateToProps = state => ({
   ...state
 });
 
-const mapDispatchToProps = dispatch => ({
-  ...dispatch
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
+export default connect(mapStateToProps, null)(RegisterUser);
