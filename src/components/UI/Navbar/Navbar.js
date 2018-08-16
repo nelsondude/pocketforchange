@@ -5,11 +5,20 @@ import {connect} from 'react-redux';
 import './Navbar.css';
 import {LOGOUT} from "../../../store/actions";
 import {withRouter} from "react-router";
+import URI from 'urijs';
 
 class CustomNavbar extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log('navbar', props);
+
+  state = {
+    search: ''
+  };
+
+  componentDidMount() {
+    const parsed = URI.parseQuery(this.props.location.search);
+    if ('q' in parsed) {
+      let search = parsed['q'];
+      console.log('SEARCH: ', search);
+    }
   }
 
   loggedInStatusHandler = () => {
@@ -20,9 +29,14 @@ class CustomNavbar extends React.Component {
     }
   };
 
-  searchHandler = (event) => {
-    console.log(event);
-  }
+  searchHandler = () => {
+    let searchUrl = URI('/search').query({q: this.state.search}).toString();
+    this.props.history.push(searchUrl);
+  };
+
+  handleSearchChange = (event) => {
+    this.setState({search: event.target.value});
+  };
 
   render() {
     return (
@@ -37,7 +51,11 @@ class CustomNavbar extends React.Component {
           <Navbar.Collapse>
             <Navbar.Form pullLeft>
               <FormGroup>
-                <FormControl type="text" placeholder="Search"/>
+                <FormControl
+                  onChange={this.handleSearchChange}
+                  value={this.state.search}
+                  type="text"
+                  placeholder="Search"/>
               </FormGroup>
               <Button type="submit" onClick={this.searchHandler}>Submit</Button>
             </Navbar.Form>
