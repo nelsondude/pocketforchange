@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios-instance';
 import {connect} from 'react-redux';
-import {Inputs} from 'components';
+import {Buffer, Inputs} from 'components';
 
 
 class RegisterUser extends React.Component {
@@ -55,6 +55,8 @@ class RegisterUser extends React.Component {
       <div className='Registration'>
         <div className="row">
           <div className="col-xs-12">
+            <h4 className={'text-center'}>Register for an account. It's painless.</h4>
+            <Buffer height={'30px'}/>
             <form action="" onSubmit={this.submitHandler}>
               <Inputs inputs={this.state.inputs} />
               <button type="submit" className="btn btn-primary">Register</button>

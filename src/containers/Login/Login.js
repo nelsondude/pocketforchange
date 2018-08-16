@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios-instance';
 import {connect} from 'react-redux';
-import {Input} from "../../components";
+import {Buffer, Input} from "../../components";
 import {LOGIN, LOGOUT} from "../../store/actions";
 import {withRouter} from "react-router";
 
@@ -42,6 +42,8 @@ class Login extends React.Component {
   render() {
     return (
       <div>
+        <h4 className={'text-center'}>Login. Let's start donating.</h4>
+        <Buffer height={'30px'}/>
         <form action="" onSubmit={this.loginHandler}>
           {this.state.inputs.map((options, index) => (
             <Input key={index} {...options}/>
