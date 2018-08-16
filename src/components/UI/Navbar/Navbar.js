@@ -1,23 +1,48 @@
 import React from 'react';
-import {Nav, Navbar, NavItem} from 'react-bootstrap';
+import {Button, FormControl, FormGroup, Nav, Navbar, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from 'react-redux';
 import './Navbar.css';
 import {LOGOUT} from "../../../store/actions";
 import {withRouter} from "react-router";
+import URI from 'urijs';
 
 class CustomNavbar extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log('navbar', props);
+
+  state = {
+    search: ''
+  };
+
+  componentDidMount() {
+    const parsed = URI.parseQuery(this.props.location.search);
+    if ('q' in parsed) {
+      let search = parsed['q'];
+      console.log('SEARCH: ', search);
+    }
   }
 
   loggedInStatusHandler = () => {
     if (this.props.loggedIn) {
+      this.props.history.push('/');
       this.props.logout();
     } else {
       this.props.history.push('/login/');
+    }
+  };
+
+  onSubmit = () => {
+    let searchUrl = URI('/search').query({q: this.state.search}).toString();
+    this.props.history.push(searchUrl);
+  };
+
+  handleSearchChange = (event) => {
+    this.setState({search: event.target.value});
+  };
+
+  onKeyDown = (event) => {
+    if (event.key === 'Enter' && this.state.search) {
+      event.preventDefault();
+      this.onSubmit();
     }
   };
 
@@ -32,23 +57,16 @@ class CustomNavbar extends React.Component {
             <Navbar.Toggle/>
           </Navbar.Header>
           <Navbar.Collapse>
-            <Nav>
-              <LinkContainer to={'/donator/setup-bank/'}>
-                <NavItem eventKey={1} href="#">
-                  Account Setup
-                </NavItem>
-              </LinkContainer>
-              <LinkContainer to={'/get-started/'}>
-                <NavItem eventKey={2} href="#">
-                  Register
-                </NavItem>
-              </LinkContainer>
-              <LinkContainer to={'/dashboard/'}>
-                <NavItem eventKey={4} href="#">
-                  Dashboard
-                </NavItem>
-              </LinkContainer>
-            </Nav>
+            <Navbar.Form pullLeft>
+              <FormGroup>
+                <FormControl
+                  onKeyDown={this.onKeyDown}
+                  onChange={this.handleSearchChange}
+                  value={this.state.search}
+                  type="text"
+                  placeholder="Search"/>
+              </FormGroup>
+            </Navbar.Form>
             <Nav pullRight>
               <NavItem eventKey={1} onClick={this.loggedInStatusHandler}>
                 {this.props.loggedIn ? 'Log Out' : 'Login'}
