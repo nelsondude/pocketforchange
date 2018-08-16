@@ -29,13 +29,20 @@ class CustomNavbar extends React.Component {
     }
   };
 
-  searchHandler = () => {
+  onSubmit = () => {
     let searchUrl = URI('/search').query({q: this.state.search}).toString();
     this.props.history.push(searchUrl);
   };
 
   handleSearchChange = (event) => {
     this.setState({search: event.target.value});
+  };
+
+  onKeyDown = (event) => {
+    if (event.key === 'Enter' && this.state.search) {
+      event.preventDefault();
+      this.onSubmit();
+    }
   };
 
   render() {
@@ -52,16 +59,13 @@ class CustomNavbar extends React.Component {
             <Navbar.Form pullLeft>
               <FormGroup>
                 <FormControl
+                  onKeyDown={this.onKeyDown}
                   onChange={this.handleSearchChange}
                   value={this.state.search}
                   type="text"
                   placeholder="Search"/>
               </FormGroup>
-              <Button type="submit" onClick={this.searchHandler}>Submit</Button>
             </Navbar.Form>
-            <Nav>
-
-            </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} onClick={this.loggedInStatusHandler}>
                 {this.props.loggedIn ? 'Log Out' : 'Login'}
